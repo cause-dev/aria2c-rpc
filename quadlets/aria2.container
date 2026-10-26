@@ -1,0 +1,20 @@
+[Unit]
+Description=Aria2 Download Service
+Wants=network-online.target
+After=network-online.target
+
+[Container]
+ContainerName=aria2
+Image=localhost/aria2:latest
+Volume=%h/.config/aria2:/config:Z
+Volume=%h/Downloads/aria2:/downloads:Z
+PublishPort=6800:6800
+PublishPort=6888:6888
+PublishPort=6888:6888/udp
+
+[Service]
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
